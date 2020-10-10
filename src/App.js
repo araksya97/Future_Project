@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
-import Welcome from './demo/welcome';
-import AboutMe from './demo/aboutme';
+import Welcome from './demo/Welcome';
+import AboutMe from './demo/Aboutme';
 
 function App() {
   return (

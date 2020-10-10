@@ -1,5 +1,5 @@
 import React from 'react';
-import Name from './name';
+import Name from './Name';
 import '../App.css';
 
 

@@ -1,6 +1,6 @@
 import React from 'react';
-import Name from './name';
-import Language from './language';
+import Name from './Name';
+import Language from './Language';
 import '../App.css';
 
 

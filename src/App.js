@@ -1,14 +1,12 @@
 import React from 'react';
 import './App.css';
-import Welcome from './demo/Welcome';
-import AboutMe from './demo/Aboutme';
-
+import Product from './demo/Product';
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-      <Welcome />
-      <AboutMe /> 
+      <Product name= 'banabas' price='1$' description= 'Fresh bananas from Ecuador' />
+      <Product name= 'apricot' price='5$' description= 'Fresh apricot from Armenia' />
       </header>
        
     </div>

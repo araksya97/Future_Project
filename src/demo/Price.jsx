@@ -12,7 +12,7 @@ class Price extends React.Component {
     }
     handleClick = () => {
         let {price, rate} = this.state;
-        let sign = price.[price.length-1];
+        let sign = price[price.length-1];
         if (sign === "$") {
             let amd = parseFloat(price) * rate + "d";
             this.setState({

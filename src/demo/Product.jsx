@@ -8,7 +8,7 @@ class Product extends React.Component {
         return (
             <div>
                 <Name text={this.props.name} />
-                <Price text={this.props.price} />
+                <Price text={this.props.price} rate={this.props.rate} />
                 <Description text={this.props.description} />
             </div>
 

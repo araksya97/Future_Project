@@ -1,0 +1,9 @@
+.task {
+    margin: 10px auto;
+}
+.actButton{
+    margin: 10px;
+}
+ .selected {
+     border: 1px solid red;
+ }

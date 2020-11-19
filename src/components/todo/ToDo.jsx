@@ -1,50 +1,37 @@
 import React from 'react';
-import Task from '../task/Task'
-import styles from './ToDoStyle.module.css'
-import idGenerator from '../../helpers/idGenerator'
-import { Container, Row, Col, Button, FormControl, InputGroup } from 'react-bootstrap'
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-// import { faTrash,faEdit } from '@fortawesome/free-solid-svg-icons'
+import Task from '../task/Task';
+import styles from './ToDoStyle.module.css';
+import idGenerator from '../../helpers/idGenerator';
+import { Container, Row, Col, Button } from 'react-bootstrap';
+import AddTask from '../addtask/AddTask';
+import Confirm from '../Confirm';
+import EditTaskModal from '../EditTaskModal/EditTaskModal';
 
-
-
-class ToDo extends React.Component {
+class ToDo extends React.PureComponent {
     state = {
         tasks: [],
-        inputValue: '',
         selectedTasks: new Set(),
+        showConfirm: false,
+        editTask: null,
 
     };
-    handleChange = (event) => {
-        this.setState({
-            inputValue: event.target.value
-        })
-    };
-    handleClick = () => {
-        const { inputValue } = this.state;
-        if (!inputValue) {
-            return;
-        }
+
+    addTask = (value) => {
         const newTask = {
-            text: inputValue,
+            text: value,
             _id: idGenerator(),
         }
         const tasksnew = [newTask, ...this.state.tasks];
         this.setState({
             tasks: tasksnew,
-            inputValue: '',
         });
     };
-    handleKeyDown = (event) => {
-        if (event.key === 'Enter') {
-            this.handleClick();
-        }
-    };
+
     removeTask = (taskId) => {
         const Taskss = this.state.tasks.filter(task => task._id !== taskId);
         this.setState({
             tasks: Taskss,
-
+            
         });
     };
     handleCheck = (taskId) => {
@@ -67,11 +54,32 @@ class ToDo extends React.Component {
         this.setState({
             tasks,
             selectedTasks: new Set(),
-
+            showConfirm: false
         });
-    }
+    };
+    toggleConfirm = () => {
+        this.setState({
+            showConfirm: !this.state.showConfirm
+        });
+    };
+    toogleEditModal= (task) => {
+        this.setState({
+            editTask: task
+        });
+    };
+
+    saveTask = (editedTask) =>{
+        let tasks= [...this.state.tasks];
+        const findIndex = tasks.findIndex((task)=>task._id===editedTask._id);
+        tasks[findIndex]=editedTask;
+        this.setState({
+            tasks: tasks,
+            editTask: null,
+        });
+
+    };
     render() {
-        const { tasks, inputValue, selectedTasks } = this.state;
+        const { tasks,  selectedTasks, showConfirm, editTask } = this.state;
         const groupTasks = tasks.map((task) => {
             return (
                 <Col key={task._id} xs={12} sm={6} md={4} lg={3}>
@@ -80,6 +88,7 @@ class ToDo extends React.Component {
                         onRemove={this.removeTask}
                         onCheck={this.handleCheck}
                         disabled= {!!selectedTasks.size}
+                        onEdit = {this.toogleEditModal}
                     />
                 </Col>
             )
@@ -89,32 +98,17 @@ class ToDo extends React.Component {
                 <Container>
                     <Row className='justify-content-center'>
                         <Col xs={12} sm={10} md={8}>
-                            <InputGroup className={styles.input}>
-                                <FormControl
-                                    placeholder="Add your Task"
-                                    aria-label="Add your Task"
-                                    aria-describedby="basic-addon2"
-                                    onChange={this.handleChange}
-                                    onKeyDown={this.handleKeyDown}
-                                    value={inputValue}
-                                    disabled = {!! selectedTasks.size}
-                                />
-                                <InputGroup.Append>
-                                    <Button
-                                        variant="outline-success"
-                                        onClick={this.handleClick}
-                                        disabled={!inputValue}
-                                    >Add
-                                    </Button>
-                                </InputGroup.Append>
-                            </InputGroup>
+                            <AddTask 
+                                onAdd = {this.addTask}
+                                disabled= {!!selectedTasks.size}
+                            />
                         </Col>
                     </Row>
                     <Row className='justify-content-center'>
                         <Col xs={4}>
                             <Button
                                 variant="outline-danger"
-                                onClick={this.removeSelected}
+                                onClick={this.toggleConfirm}
                                 disabled={!selectedTasks.size}
                             > Remove Selected
                         </Button>
@@ -124,6 +118,23 @@ class ToDo extends React.Component {
                         {groupTasks}
                     </Row>
                 </Container>
+    {
+        showConfirm &&
+        <Confirm 
+            onClose ={this.toggleConfirm} 
+            onSubmit ={this.removeSelected} 
+            count = {selectedTasks.size}
+        />
+    }
+
+    {
+        !!editTask &&
+        <EditTaskModal
+            data={editTask}
+            onSave = {this.saveTask}
+            onClose= {()=> this.toogleEditModal(null)}
+        />
+    }          
             </div>
         );
     }

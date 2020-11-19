@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React, { PureComponent  } from 'react';
 import { Button, Card } from 'react-bootstrap';
 import styles from './TaskStyle.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faEdit } from '@fortawesome/free-solid-svg-icons';
+import PropTypes from 'prop-types';
 
-
-class Task extends Component {
+class Task extends PureComponent {
     state = {
         checked: false
     };
@@ -33,12 +33,14 @@ class Task extends Component {
                         variant="primary" 
                         className={styles.actButton}
                         disabled = {disabled}
+                        onClick = {()=> this.props.onEdit(task)}
                         >
                             <FontAwesomeIcon icon={faEdit} />
                         </Button>
                         <Button
                             variant="danger"
                             className={styles.actButton}
+                            disabled = {disabled}
                             onClick={() => this.props.onRemove(task._id)}
                         >
                             <FontAwesomeIcon icon={faTrash} />
@@ -49,5 +51,12 @@ class Task extends Component {
         )
     }
 
+};
+Task.propTypes = {
+    data: PropTypes.object.isRequired,
+    disabled: PropTypes.bool.isRequired,
+    onRemove: PropTypes.func.isRequired,
+    onCheck: PropTypes.func.isRequired,
+    
 };
 export default Task;

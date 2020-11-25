@@ -27,10 +27,10 @@ class Task extends PureComponent {
                         type='checkbox'
                         onClick={this.handleCheck }
                         />
-                        <Card.Title>{task.text.slice(0, 10) + '...'}</Card.Title>
-                        <Card.Text>{task.text}</Card.Text>
+                        <Card.Title>{task.title}</Card.Title>
+                        <Card.Text>{task.description}</Card.Text>
                         <Button 
-                        variant="primary" 
+                        variant="primary"  
                         className={styles.actButton}
                         disabled = {disabled}
                         onClick = {()=> this.props.onEdit(task)}

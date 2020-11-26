@@ -1,9 +1,9 @@
 import React from 'react';
-import Task from '../task/Task';
+import Task from '../Task/Task';
 import styles from './ToDoStyle.module.css';
 // import idGenerator from '../../helpers/idGenerator';
 import { Container, Row, Col, Button } from 'react-bootstrap';
-import AddTask from '../addtask/AddTask';
+import AddTask from '../AddTask/AddTask';
 import Confirm from '../Confirm';
 import EditTaskModal from '../EditTaskModal/EditTaskModal';
 
@@ -13,7 +13,7 @@ class ToDo extends React.PureComponent {
         selectedTasks: new Set(),
         showConfirm: false,
         editTask: null,
-
+        openNewTaskModal: false,
     };
     componentDidMount() {
         fetch("http://localhost:3001/task", {
@@ -52,6 +52,7 @@ class ToDo extends React.PureComponent {
                 const tasksnew = [response, ...this.state.tasks];
                 this.setState({
                     tasks: tasksnew,
+                    openNewTaskModal: false,
                 });
             })
             .catch((error) => {
@@ -154,7 +155,7 @@ class ToDo extends React.PureComponent {
                 }
                 let tasks = [...this.state.tasks];
                 const findIndex = tasks.findIndex((task) => task._id === editedTask._id);
-                tasks[findIndex] = response ;
+                tasks[findIndex] = response;
                 this.setState({
                     tasks: tasks,
                     editTask: null,
@@ -163,14 +164,16 @@ class ToDo extends React.PureComponent {
             .catch((error) => {
                 console.log("ERROR")
             });
-
-    
-
-        
-
     };
+
+    toggleNewTaskModal = () => {
+        this.setState({
+            openNewTaskModal: !this.state.openNewTaskModal
+        });
+    }
+
     render() {
-        const { tasks, selectedTasks, showConfirm, editTask } = this.state;
+        const { tasks, selectedTasks, showConfirm, editTask, openNewTaskModal } = this.state;
         const groupTasks = tasks.map((task) => {
             return (
                 <Col key={task._id} xs={12} sm={6} md={4} lg={3}>
@@ -187,27 +190,31 @@ class ToDo extends React.PureComponent {
         return (
             <div className={styles.todo}>
                 <Container>
-                    <Row className='justify-content-center'>
+                    <Row className='justify-content-center text-center'>
                         <Col xs={12} sm={10} md={8}>
-                            <AddTask
-                                onAdd={this.addTask}
+                            <Button
+                                variant="outline-success"
+                                onClick={this.toggleNewTaskModal}
                                 disabled={!!selectedTasks.size}
-                            />
+                            >
+                                Add New Task
+                            </Button>
                         </Col>
+                    </Row>
+                    <Row>
+                        {groupTasks}
                     </Row>
                     <Row className='justify-content-center'>
                         <Col xs={4}>
                             <Button
                                 variant="outline-danger"
                                 onClick={this.toggleConfirm}
-                                disabled={!selectedTasks.size}
+                                 disabled={!selectedTasks.size}
                             > Remove Selected
                         </Button>
                         </Col>
                     </Row>
-                    <Row>
-                        {groupTasks}
-                    </Row>
+                    
                 </Container>
                 {
                     showConfirm &&
@@ -224,6 +231,13 @@ class ToDo extends React.PureComponent {
                         data={editTask}
                         onSave={this.saveTask}
                         onClose={() => this.toogleEditModal(null)}
+                    />
+                }
+
+                { openNewTaskModal &&
+                    <AddTask
+                        onAdd={this.addTask}
+                        onClose = {this.toggleNewTaskModal}
                     />
                 }
             </div>

@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 // import Product from './demo/Product';
-import ToDo from './components/todo/ToDo';
+import ToDo from './components/ToDo/ToDo';
 
 
 function App() {

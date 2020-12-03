@@ -12,12 +12,6 @@ class AddTask extends React.Component {
         date: new Date()
 
     };
-    // var1
-    // handleChange = (event, name) => {
-    //     this.setState({
-    //         [name]: event.target.value
-    //     })
-    // };
     handleChange = (event) => {
         const{name, value} = event.target
         this.setState({
@@ -35,13 +29,14 @@ class AddTask extends React.Component {
         }
     };
     addTask = () => {
-        const { title, description } = this.state;
+        const { title, description, date } = this.state;
         if (!title) {
             return;
         }
         const task = {
             title: title,
-            description: description
+            description: description,
+            date: date.toISOString().slice(0, 10)  
         };
         this.props.onAdd(task)
     };
@@ -58,7 +53,6 @@ class AddTask extends React.Component {
                         placeholder="Title"
                         name="title"
                         onChange={this.handleChange}
-                        // onChange={(event)=>this.handleChange(event, 'title')}  
                         onKeyDown={this.handleKeyDown}
                     />
                     <textarea
@@ -67,12 +61,13 @@ class AddTask extends React.Component {
                         placeholder="Description"
                         name="description"
                         onChange={this.handleChange}
-                    // onChange={(event)=>this.handleChange(event, 'description')}
                     >
                     </textarea>
                     <DatePicker 
-                    selected={new Date()} 
-                    onChange={this.handledatechange} />
+                    selected={this.state.date} 
+                    onChange={this.handledatechange}
+                    minDate= {new Date()}
+                     />
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="primary" onClick={this.addTask}>
@@ -90,8 +85,8 @@ class AddTask extends React.Component {
 
 
 AddTask.propTypes = {
-    disabled: PropTypes.bool,
     onAdd: PropTypes.func.isRequired,
+    onClose: PropTypes.func.isRequired,
 
 }
 export default AddTask;

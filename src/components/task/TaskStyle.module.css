@@ -4,6 +4,10 @@
 .actButton{
     margin: 10px;
 }
- .selected {
-     border: 1px solid red;
- }
+.selected {
+    border: 1px solid red;
+}
+.date {
+    font-size: 12px;
+    margin-bottom: 3px;
+}

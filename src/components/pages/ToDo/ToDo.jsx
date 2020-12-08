@@ -1,11 +1,11 @@
 import React from 'react';
-import Task from '../Task/Task';
+import Task from '../../Task/Task';
 import styles from './ToDoStyle.module.css';
 // import idGenerator from '../../helpers/idGenerator';
 import { Container, Row, Col, Button } from 'react-bootstrap';
-import AddTask from '../AddTask/AddTask';
-import Confirm from '../Confirm';
-import EditTaskModal from '../EditTaskModal/EditTaskModal';
+import AddTask from '../../AddTask/AddTask';
+import Confirm from '../../Confirm';
+import EditTaskModal from '../../EditTaskModal/EditTaskModal';
 
 class ToDo extends React.PureComponent {
     state = {

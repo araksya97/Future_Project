@@ -1,0 +1,8 @@
+.active {
+     color: rgb(20, 102, 56); 
+}
+.navLink{
+    margin: 0 10px;
+    font-size: 18px;
+    /* color: rgb(20, 102, 56); */
+}

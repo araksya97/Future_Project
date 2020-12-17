@@ -1,0 +1,12 @@
+.singletask{
+    border: 1px solid seagreen;
+    padding: 30px;
+    border-radius: 15px;
+    margin: 10px;
+}
+.desc {
+    max-width: 300px;
+}
+.button {
+    margin: 10px;
+}

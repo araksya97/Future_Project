@@ -1,0 +1,17 @@
+.form {
+    width: 70%;
+    margin: 20px auto;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+}
+.formElem {
+    margin: 10px 0;
+}
+
+.formButton{
+    width: 30%;
+    height: 40px;
+    margin: 10px auto;
+    background-color: rgb(90, 133, 90);
+}

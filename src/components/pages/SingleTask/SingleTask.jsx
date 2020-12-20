@@ -1,7 +1,7 @@
 import React from 'react';
 import { formatDate } from '../../../helpers/utils'
 import Spinner from '../Spinner/Spinner'
-import { Button, Container, Row, Col } from 'react-bootstrap';
+import { Button,Card} from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faEdit } from '@fortawesome/free-solid-svg-icons';
 import EditTaskModal from '../../EditTaskModal/EditTaskModal'
@@ -91,34 +91,32 @@ export default class SingleTask extends React.PureComponent {
         return (
             <>
                 {!!singletask ?
-                    <Container>
-                        <Row className='justify-content-center text-center'>
-                            <Col xs={12} sm={10} md={8}>
-                                <div className={styles.singletask}>
-                                    <h2>{singletask.title} </h2>
-                                    <p className={styles.desc}> Description: {singletask.description} </p>
-                                    <p> Date: {formatDate(singletask.date)} </p>
-                                    <p> Created at: {formatDate(singletask.created_at)} </p>
-                                    <Button
-                                        variant="primary"
-                                        className={styles.button}
-                                        onClick={this.toogleEditModal}
-                                    >
-                                        <FontAwesomeIcon icon={faEdit} />
-                                    </Button>
-                                    <Button
-                                        className={styles.button}
-                                        variant="danger"
-                                        onClick={this.onRemove}
-                                    >
-                                        <FontAwesomeIcon icon={faTrash} />
-                                    </Button>
-                                </div>
-                            </Col>
-                        </Row>
-                    </Container>
+                    <Card className={styles.singletask}>
+                        <Card.Body>
+                            <Card.Title>
+                                <h2>{singletask.title} </h2>
+                            </Card.Title>
+                            <Card.Text>Description: {singletask.description}</Card.Text>
+                            <Card.Text>Date: {formatDate(singletask.date)}</Card.Text>
+                            <Card.Text>Created at: {formatDate(singletask.created_at)}</Card.Text>
+                            <Button
+                                variant="primary"
+                                className={styles.button}
+                                onClick={this.toogleEditModal}
+                            >
+                                <FontAwesomeIcon icon={faEdit} />
+                            </Button>
+                            <Button
+                                className={styles.button}
+                                variant="danger"
+                                onClick={this.onRemove}
+                            >
+                                <FontAwesomeIcon icon={faTrash} />
+                            </Button>
+                        </Card.Body>
+                    </Card>
                     : <Spinner />}
-                { openeditTask &&
+                {openeditTask &&
                     <EditTaskModal
                         data={singletask}
                         onSave={this.saveTask}

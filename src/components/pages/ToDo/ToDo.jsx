@@ -190,7 +190,7 @@ class ToDo extends React.PureComponent {
             <div className={styles.todo}>
                 <Container>
                     <Row className='justify-content-center text-center'>
-                        <Col xs={12} sm={10} md={8}>
+                        <Col xs={4}>
                             <Button
                                 variant="outline-success"
                                 onClick={this.toggleNewTaskModal}
@@ -199,21 +199,19 @@ class ToDo extends React.PureComponent {
                                 Add New Task
                             </Button>
                         </Col>
-                    </Row>
-                    <Row>
-                        {groupTasks}
-                    </Row>
-                    <Row className='justify-content-center'>
                         <Col xs={4}>
                             <Button
                                 variant="outline-danger"
                                 onClick={this.toggleConfirm}
-                                 disabled={!selectedTasks.size}
-                            > Remove Selected
-                        </Button>
+                                disabled={!selectedTasks.size}
+                            > 
+                                Remove Selected
+                            </Button>           
                         </Col>
                     </Row>
-                    
+                    <Row>
+                        {groupTasks}
+                    </Row>
                 </Container>
                 {
                     showConfirm &&
@@ -236,7 +234,7 @@ class ToDo extends React.PureComponent {
                 { openNewTaskModal &&
                     <AddTask
                         onAdd={this.addTask}
-                        onClose = {this.toggleNewTaskModal}
+                        onClose={this.toggleNewTaskModal}
                     />
                 }
             </div>

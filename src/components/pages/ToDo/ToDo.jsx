@@ -5,35 +5,20 @@ import { Container, Row, Col, Button } from 'react-bootstrap';
 import AddTask from '../../AddTask/AddTask';
 import Confirm from '../../Confirm';
 import EditTaskModal from '../../EditTaskModal/EditTaskModal';
+import { connect } from 'react-redux';
+import { getTasks } from '../../../store/actions';
+
+
 
 class ToDo extends React.PureComponent {
     state = {
-        tasks: [],
         selectedTasks: new Set(),
         showConfirm: false,
         editTask: null,
         openNewTaskModal: false,
     };
     componentDidMount() {
-        fetch("http://localhost:3001/task", {
-            method: 'GET',
-            headers: {
-                "Content-Type": "application/json"
-            },
-
-        })
-            .then((res) => res.json())
-            .then(response => {
-                if (response.error) {
-                    throw response.error;
-                }
-                this.setState({
-                    tasks: response,
-                });
-            })
-            .catch((error) => {
-                console.log("ERROR")
-            });
+        this.props.getTasks();
     }
     addTask = (data) => {
         fetch("http://localhost:3001/task", {
@@ -172,8 +157,8 @@ class ToDo extends React.PureComponent {
     }
 
     render() {
-        const { tasks, selectedTasks, showConfirm, editTask, openNewTaskModal } = this.state;
-        const groupTasks = tasks.map((task) => {
+        const { selectedTasks, showConfirm, editTask, openNewTaskModal } = this.state;
+        const groupTasks = this.props.tasks.map((task) => {
             return (
                 <Col key={task._id} xs={12} sm={6} md={4} lg={3}>
                     <Task
@@ -204,9 +189,9 @@ class ToDo extends React.PureComponent {
                                 variant="outline-danger"
                                 onClick={this.toggleConfirm}
                                 disabled={!selectedTasks.size}
-                            > 
+                            >
                                 Remove Selected
-                            </Button>           
+                            </Button>
                         </Col>
                     </Row>
                     <Row>
@@ -243,5 +228,14 @@ class ToDo extends React.PureComponent {
 }
 
 
+const mapStateToProps = (state) => {
+    return {
+        tasks: state.tasks
+    };
+}
+const mapDispatchToProps = {
+    getTasks: getTasks
+};
 
-export default ToDo;
+
+export default connect(mapStateToProps, mapDispatchToProps)(ToDo);

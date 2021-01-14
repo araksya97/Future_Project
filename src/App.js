@@ -14,7 +14,7 @@ function App() {
   return (
     <div className="App">
 
-      <NavMenu/>
+      <NavMenu />
       <Switch>
         <Route path='/' exact component={ToDo} />
         <Route path='/about' exact component={About} />

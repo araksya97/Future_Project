@@ -20,56 +20,11 @@ class ToDo extends React.PureComponent {
     componentDidMount() {
         this.props.getTasks();
     }
-    addTask = (data) => {
-        fetch("http://localhost:3001/task", {
-            method: 'POST',
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: (JSON.stringify(data))
-        })
-            .then((res) => res.json())
-            .then(response => {
-                if (response.error) {
-                    throw response.error;
-                }
-                const tasksnew = [response, ...this.state.tasks];
-                this.setState({
-                    tasks: tasksnew,
-                    openNewTaskModal: false,
-                });
-            })
-            .catch((error) => {
-                console.log("ERROR")
-            });
-
-    };
-
-    removeTask = (taskId) => {
-        fetch(`http://localhost:3001/task/${taskId}`, {
-            method: 'DELETE',
-            headers: {
-                "Content-Type": "application/json"
-            },
-        })
-            .then((res) => res.json())
-            .then(response => {
-                if (response.error) {
-                    throw response.error;
-                }
-                const Taskss = this.state.tasks.filter(task => task._id !== taskId);
-                this.setState({
-                    tasks: Taskss,
-
-                });
-            })
-            .catch((error) => {
-                console.log("ERROR")
-            });
-
-    };
-
-
+    componentDidUpdate(prevProps){
+        if(!prevProps.addTaskSuccess && this.props.addTaskSuccess){
+            this.toggleNewTaskModal();
+        }
+    }
     handleCheck = (taskId) => {
         const selectedTasks = new Set(this.state.selectedTasks);
         if (selectedTasks.has(taskId)) {
@@ -218,7 +173,6 @@ class ToDo extends React.PureComponent {
 
                 { openNewTaskModal &&
                     <AddTask
-                        onAdd={this.addTask}
                         onClose={this.toggleNewTaskModal}
                     />
                 }
@@ -230,7 +184,8 @@ class ToDo extends React.PureComponent {
 
 const mapStateToProps = (state) => {
     return {
-        tasks: state.tasks
+        tasks: state.tasks,
+        addTaskSuccess: state.addTaskSuccess    
     };
 }
 const mapDispatchToProps = {

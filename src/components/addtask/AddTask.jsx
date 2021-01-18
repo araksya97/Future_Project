@@ -1,9 +1,11 @@
-import React, {Component, createRef }from 'react';
+import React, { Component, createRef } from 'react';
 import styles from './AddTaskStyle.module.css';
 import { Button, FormControl, Modal } from 'react-bootstrap';
-import DatePicker  from "react-datepicker";
+import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { addTask } from '../../store/actions'
 
 class AddTask extends Component {
     constructor(props) {
@@ -12,16 +14,16 @@ class AddTask extends Component {
             title: '',
             description: '',
             date: new Date()
-    
+
         };
         this.titleRef = createRef(null)
     }
-    
-    componentDidMount(){
+
+    componentDidMount() {
         this.titleRef.current.focus()
     }
     handleChange = (event) => {
-        const{name, value} = event.target
+        const { name, value } = event.target
         this.setState({
             [name]: value
         })
@@ -44,11 +46,11 @@ class AddTask extends Component {
         const task = {
             title: title,
             description: description,
-            date: date.toISOString().slice(0, 10)  
+            date: date.toISOString().slice(0, 10)
         };
-        this.props.onAdd(task)
+        this.props.addTask(task)
     };
-    
+
     render() {
         const { onClose } = this.props;
         return (
@@ -62,7 +64,7 @@ class AddTask extends Component {
                         name="title"
                         onChange={this.handleChange}
                         onKeyDown={this.handleKeyDown}
-                        ref= {this.titleRef}
+                        ref={this.titleRef}
                         className={styles.focusSt}
                     />
                     <textarea
@@ -74,11 +76,11 @@ class AddTask extends Component {
 
                     >
                     </textarea>
-                    <DatePicker 
-                    selected={this.state.date} 
-                    onChange={this.handledatechange}
-                    minDate= {new Date()}
-                     />
+                    <DatePicker
+                        selected={this.state.date}
+                        onChange={this.handledatechange}
+                        minDate={new Date()}
+                    />
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="primary" onClick={this.addTask}>
@@ -96,8 +98,10 @@ class AddTask extends Component {
 
 
 AddTask.propTypes = {
-    onAdd: PropTypes.func.isRequired,
     onClose: PropTypes.func.isRequired,
-
 }
-export default AddTask;
+
+const mapDispatchToProps =  {
+    addTask,
+}
+export default connect(null, mapDispatchToProps)(AddTask);

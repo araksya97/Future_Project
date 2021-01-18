@@ -6,6 +6,8 @@ import { faTrash, faEdit } from '@fortawesome/free-solid-svg-icons';
 import PropTypes from 'prop-types';
 import { formatDate } from '../../helpers/utils'
 import { Link } from 'react-router-dom';
+import {connect} from 'react-redux';
+import {removeTask} from '../../store/actions';
 
 class Task extends PureComponent {
     state = {
@@ -47,8 +49,7 @@ class Task extends PureComponent {
                             variant="danger"
                             className={styles.actButton}
                             disabled={disabled}
-                            onClick={() => this.props.onRemove(task._id)}
-                        >
+                            onClick = {()=>this.props.removeTask(task._id)}                        >
                             <FontAwesomeIcon icon={faTrash} />
                         </Button>
                     </Card.Body>
@@ -61,8 +62,10 @@ class Task extends PureComponent {
 Task.propTypes = {
     data: PropTypes.object.isRequired,
     disabled: PropTypes.bool.isRequired,
-    onRemove: PropTypes.func.isRequired,
     onCheck: PropTypes.func.isRequired,
 
 };
-export default Task;
+const mapDispatchToProps = {
+    removeTask
+};
+export default connect(null, mapDispatchToProps)(Task); 

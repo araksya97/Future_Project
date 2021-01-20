@@ -29,13 +29,14 @@ function App(props) {
       <NavMenu />
       <Switch>
         <Route path='/' exact component={ToDo} />
+        <Route path='/task' exact component={ToDo} />
         <Route path='/about' exact component={About} />
         <Route path='/task/:id' exact component={SingleTask} />
         <Route path='/contact' exact component={Contact} />
         <Route path='/404' exact component={NotFound} />
         <Redirect to='/404' />
       </Switch>
-
+ 
       <ToastContainer
         position="bottom-left"
         autoClose={3000}

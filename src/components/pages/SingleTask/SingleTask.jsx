@@ -2,11 +2,11 @@ import React from 'react';
 import { formatDate } from '../../../helpers/utils'
 import { Button,Card} from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash, faEdit } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faEdit,faHistory, faCheck } from '@fortawesome/free-solid-svg-icons';
 import EditTaskModal from '../../EditTaskModal/EditTaskModal'
 import styles from './SingleTaskStyles.module.css'
 import { connect } from 'react-redux';
-import { getSingleTask, removeTask } from '../../../store/actions';
+import { getSingleTask, removeTask, changeTaskStatus} from '../../../store/actions';
 
 class SingleTask extends React.PureComponent {
     state = {
@@ -66,8 +66,26 @@ class SingleTask extends React.PureComponent {
                                 <h2>{singletask.title} </h2>
                             </Card.Title>
                             <Card.Text>Description: {singletask.description}</Card.Text>
+                            <Card.Text>Status: {singletask.status}</Card.Text>
                             <Card.Text>Date: {formatDate(singletask.date)}</Card.Text>
                             <Card.Text>Created at: {formatDate(singletask.created_at)}</Card.Text>
+                            {
+                            singletask.status === 'active' ?
+                                <Button
+                                    variant="success"
+                                    className={styles.actButton}
+                                    onClick={() =>  this.props.changeTaskStatus(singletask._id, {status: 'done'}, 'single')}
+                                >
+                                    <FontAwesomeIcon icon={faCheck} />
+                                </Button> :
+                                <Button
+                                    variant="warning"
+                                    className={styles.actButton}
+                                    onClick={() =>  this.props.changeTaskStatus(singletask._id, {status: 'active'}, 'single')}
+                                >
+                                    <FontAwesomeIcon icon={faHistory} />
+                                </Button>
+                        }
                             <Button
                                 variant="primary"
                                 className={styles.button}
@@ -109,7 +127,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
     getSingleTask,
-    removeTask
+    removeTask, 
+    changeTaskStatus
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SingleTask); ;

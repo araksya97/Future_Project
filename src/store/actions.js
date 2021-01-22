@@ -1,8 +1,11 @@
 import request from '../helpers/request';
 import * as actionTypes from './actionTypes';
 
+
+const apiUrl = process.env.REACT_APP_API_URL;
+
 export function getTasks(data = {}) {
-    let url = 'http://localhost:3001/task';
+    let url = `${apiUrl}/task`;
 
     let query = '?';
     for (let key in data) {
@@ -30,7 +33,7 @@ export function getSingleTask(taskId) {
     return (dispatch) => {
         dispatch({ type: actionTypes.LOADING });
 
-        request(`http://localhost:3001/task/${taskId}`)
+        request(`${apiUrl}/task/${taskId}`)
             .then(res => {
                 dispatch({ type: actionTypes.GET_SINGLE_TASK_SUCCESS, task: res });
             })
@@ -43,7 +46,7 @@ export function getSingleTask(taskId) {
 export function addTask(data) {
     return (dispatch) => {
         dispatch({ type: actionTypes.LOADING });
-        request('http://localhost:3001/task', 'POST', data)
+        request(`${apiUrl}/task`, 'POST', data)
             .then(res => {
                 dispatch({ type: actionTypes.ADD_TASK_SUCCESS, task: res });
             })
@@ -58,7 +61,7 @@ export function removeTask(taskId, from = 'tasks') {
     return (dispatch) => {
         dispatch({ type: actionTypes.LOADING });
 
-        request(`http://localhost:3001/task/${taskId}`, 'DELETE')
+        request(`${apiUrl}/task/${taskId}`, 'DELETE')
             .then(res => {
                 dispatch({ type: actionTypes.REMOVE_TASK_SUCCESS, taskId, from });
             })
@@ -72,7 +75,7 @@ export function removeSelected(taskIds) {
     return (dispatch) => {
         dispatch({ type: actionTypes.LOADING });
 
-        request(`http://localhost:3001/task`, 'PATCH', { tasks: taskIds })
+        request(`${apiUrl}/task`, 'PATCH', { tasks: taskIds })
             .then(() => {
                 dispatch({ type: actionTypes.REMOVE_SELECTED_TASKS_SUCCESS, taskIds });
             })
@@ -86,7 +89,7 @@ export function editTask(data, from) {
     return (dispatch) => {
         dispatch({ type: actionTypes.LOADING });
 
-        request(`http://localhost:3001/task/${data._id}`, 'PUT', data)
+        request(`${apiUrl}/task/${data._id}`, 'PUT', data)
             .then((editedTask) => {
                 dispatch({ type: actionTypes.EDIT_TASK_SUCCESS, task: editedTask, from });
             })
@@ -100,7 +103,7 @@ export function changeTaskStatus(id, data, from) {
     return (dispatch) => {
         dispatch({ type: actionTypes.LOADING });
 
-        request(`http://localhost:3001/task/${id}`, 'PUT', data)
+        request(`${apiUrl}/task/${id}`, 'PUT', data)
             .then((editedTask) => {
                 dispatch({ type: actionTypes.CHANGE_TASK_STATUS, task: editedTask, from });
             })

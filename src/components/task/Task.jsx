@@ -83,7 +83,7 @@ Task.propTypes = {
     data: PropTypes.object.isRequired,
     disabled: PropTypes.bool.isRequired,
     onCheck: PropTypes.func.isRequired,
-
+    onEdit: PropTypes.func.isRequired
 };
 const mapDispatchToProps = {
     removeTask,

@@ -1,12 +1,18 @@
 .singletask{
-    border: 1px solid seagreen;
+    border: 2px solid rgb(61,77,34);
     padding: 30px;
     border-radius: 15px;
     margin: 10px auto;
     max-width: 700px;
+    /* background-color: rgb(192, 211, 160); */
+    /* box-shadow: #000; */
 
 }
 
 .button {
     margin: 10px;
+}
+.span {
+    color: rgb(61, 77, 34);
+    font-weight: 500;
 }

@@ -1,8 +1,100 @@
-.active {
-     color: rgb(20, 102, 56); 
+.navbar{
+    width: 100vw;
+    height: 100px;
+    display: flex;
+    justify-content:space-evenly;
+    margin: 0, auto;
+    background-color: darkolivegreen;
+    z-index: 9999;
+}
+.logo{
+    max-width:  500px;
+    max-height: 100px;
+    padding: 10px 10px
 }
 .navLink{
-    margin: 0 10px;
-    font-size: 18px;
-    /* color: rgb(20, 102, 56); */
+    font-size: 20px;
+    color: rgb(0, 0, 0);
+    padding: 20px;
+}
+.active {
+    color: rgb(2, 49, 26); 
+}
+.navLink:hover {
+    color: rgb(0, 0, 0);
+}
+.filterIcon {
+    background-color: transparent; 
+    border: none;
+    color: #000;
+    text-align: center;
+    font-size: 25px;
+}
+.menu{
+    margin: 35px;
+}
+.menu>ul{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: row;
+    padding: 0;
+}
+.menu>ul>li {
+    list-style-type: none;
+}
+.mobile_btn {
+    display: none;
+    font-size: 30px;
+    cursor: pointer;
+    margin: 30px;
+}
+
+@media screen and (max-width: 900px) {
+    .mobile_btn {
+        display: block;
+        order: 3;
+    }
+    .menu {
+        display: block;
+        top: 90px;
+        width: 100%;
+        min-height: 80px;
+        left: 0;
+        position: absolute;
+        background: rgb(107, 126, 74);
+        transform: translateY(-500px);
+        transition: 0.5s;
+        z-index: 9000;
+        margin: 0;
+    }
+
+    .activemenu {
+        transform: translateY(0px);
+    }
+    .menu>ul>li{
+        margin: 25px 0;
+    }
+}
+@media screen and (max-width: 500px) {
+    .logo{
+        max-width: 200px;
+        max-height: 80px;
+    }
+    .navbar{
+        height: 80px;
+    }
+    .mobile_btn{
+        margin: 17px;
+    }
+    .menu {
+        top: 80px;
+        height: 70px;
+    }
+}
+
+@media screen and (max-width: 340px) {
+    .navLink{
+        padding: 20px 10px;
+    }
 }

@@ -25,24 +25,24 @@ class Task extends PureComponent {
         const { disabled } = this.props;
         return (
             <>
-                <Card className={`${styles.task} ${checked ? styles.selected : ''}`}>
+                <Card className={`${styles.task} ${checked ? styles.selected : ''} ${task.status ==='active' ? styles.btnactive : ''} `}>
                     <Card.Body>
                         <input
                             type='checkbox'
                             onClick={this.handleCheck}
                         />
-                        <Card.Title>
-                            <Link to={`/task/${task._id}`}>{trimString(task.title, 25)}</Link>
+                        <Card.Title >
+                            <Link className={styles.title} to={`/task/${task._id}`}>{trimString(task.title, 25)}</Link>
                         </Card.Title>
-                        <Card.Text>Description: {trimString(task.description, 60)}</Card.Text>
-                        <Card.Text className={styles.status}>Status: {task.status}</Card.Text>
+                        <Card.Text><span className={styles.span}>Description:</span> {trimString(task.description, 60)}</Card.Text>
+                        <Card.Text className={styles.status}><span className={styles.span}>Status:</span> {task.status}</Card.Text>
                         <Card.Text className={styles.date}>Date: {formatDate(task.date)}</Card.Text>
                         <Card.Text className={styles.date}>Created at: {formatDate(task.created_at)}</Card.Text>
                         {
                             task.status === 'active' ?
                                 <Button
                                     variant="success"
-                                    className={styles.actButton}
+                                    className= {styles.button} 
                                     disabled={disabled}
                                     onClick={() =>  this.props.changeTaskStatus(task._id, {status: 'done'}, 'tasks')}
                                 >
@@ -50,7 +50,7 @@ class Task extends PureComponent {
                                 </Button> :
                                 <Button
                                     variant="warning"
-                                    className={styles.actButton}
+                                    className={styles.button}
                                     disabled={disabled}
                                     onClick={() =>  this.props.changeTaskStatus(task._id, {status: 'active'}, 'tasks')}
                                 >
@@ -59,7 +59,7 @@ class Task extends PureComponent {
                         }
                         <Button
                             variant="primary"
-                            className={styles.actButton}
+                            className={styles.button}
                             disabled={disabled}
                             onClick={() => this.props.onEdit(task)}
                         >
@@ -67,7 +67,7 @@ class Task extends PureComponent {
                         </Button>
                         <Button
                             variant="danger"
-                            className={styles.actButton}
+                            className={styles.button}
                             disabled={disabled}
                             onClick={() => this.props.removeTask(task._id)}                        >
                             <FontAwesomeIcon icon={faTrash} />

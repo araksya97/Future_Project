@@ -65,22 +65,22 @@ class SingleTask extends React.PureComponent {
                             <Card.Title>
                                 <h2>{singletask.title} </h2>
                             </Card.Title>
-                            <Card.Text>Description: {singletask.description}</Card.Text>
-                            <Card.Text>Status: {singletask.status}</Card.Text>
-                            <Card.Text>Date: {formatDate(singletask.date)}</Card.Text>
-                            <Card.Text>Created at: {formatDate(singletask.created_at)}</Card.Text>
+                            <Card.Text><span className={styles.span}>Description:</span> {singletask.description}</Card.Text>
+                            <Card.Text><span className={styles.span}>Status:</span> {singletask.status}</Card.Text>
+                            <Card.Text><span className={styles.span}>Date:</span> {formatDate(singletask.date)}</Card.Text>
+                            <Card.Text><span className={styles.span}>Created at:</span> {formatDate(singletask.created_at)}</Card.Text>
                             {
                             singletask.status === 'active' ?
                                 <Button
                                     variant="success"
-                                    className={styles.actButton}
+                                    className={styles.button}
                                     onClick={() =>  this.props.changeTaskStatus(singletask._id, {status: 'done'}, 'single')}
                                 >
                                     <FontAwesomeIcon icon={faCheck} />
                                 </Button> :
                                 <Button
                                     variant="warning"
-                                    className={styles.actButton}
+                                    className={styles.button}
                                     onClick={() =>  this.props.changeTaskStatus(singletask._id, {status: 'active'}, 'single')}
                                 >
                                     <FontAwesomeIcon icon={faHistory} />

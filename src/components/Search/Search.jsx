@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { Navbar, Nav, NavDropdown, FormControl, Form, Button } from 'react-bootstrap';
+import {NavDropdown, FormControl, Form, Button } from 'react-bootstrap';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { connect } from 'react-redux';
 import { getTasks } from '../../store/actions';
+import styles from './SearchStyles.module.css';
 
 const statusOptions = [
     {
@@ -109,78 +110,83 @@ function Search(props) {
 
     return (
         <>
-            <Navbar bg="light" expand="lg">
-                <Navbar.Brand>Search/Sort/Filter</Navbar.Brand>
-                <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="mr-auto">
+            <div className={styles.searchbar}> 
 
-                        <NavDropdown title={status.value ? status.label : "Status"}>
-                            {
-                                statusOptions.map((item, index) => {
-                                    return (
-                                        <NavDropdown.Item
-                                            key={index}
-                                            onClick={() => setStatus(item)}
-                                            active={status.value === item.value}
-                                        >
-                                            {item.label}
-                                        </NavDropdown.Item>
-                                    )
-                                })
-                            }
-                        </NavDropdown>
 
-                        <NavDropdown title={sort.value ? sort.label : "Sort"}>
-                            {
-                                sortOptions.map((item, index) => {
-                                    return (
-                                        <NavDropdown.Item
-                                            key={index}
-                                            onClick={() => setSort(item)}
-                                            active={sort.value === item.value}
-                                        >
-                                            {item.label}
-                                        </NavDropdown.Item>
-                                    )
-                                })
-                            }
-                        </NavDropdown>
-                    </Nav>
-                    <Form inline>
-                        <FormControl
-                            type="text"
-                            placeholder="Search"
-                            value={search}
-                            onChange={(event) => setSearch(event.target.value)}
-                            className="mr-sm-2" />
-                        <Button
-                            variant="outline-success"
-                            onClick={handleSubmit}
-                        >
-                            Search</Button>
-                    </Form>
-                </Navbar.Collapse>
-            </Navbar>
-            {
-                dateOptions.map((item, index) => {
-                    return (
-                        <div key={index}>
-                            <span>{item.label} </span>
-                            <DatePicker
-                                selected={dates[item.value]}
-                                onChange={(date) => {
-                                    setDates({
-                                        ...dates,
-                                        [item.value]: date
-                                    });
-                                }}
-                            />
-                        </div>
-                    )
-                })
+                {
+                    dateOptions.map((item, index) => {
+                        return (
+                            <div key={index}  className={styles.dateOpt}>
+                                <span>{item.label} </span>
+                                <DatePicker
+                                    className={styles.datePicker}
+                                    selected={dates[item.value]}
+                                    onChange={(date) => {
+                                        setDates({
+                                            ...dates,
+                                            [item.value]: date
+                                        });
+                                    }}
+                                />
+                            </div>
+                        )
+                    })
 
-            }
+                }
+                
+
+                <NavDropdown 
+                 className={styles.dropdown}
+                title={status.value ? status.label : "Status"}>
+                    {
+                        statusOptions.map((item, index) => {
+                            return (
+                                <NavDropdown.Item
+                                    key={index}
+                                    onClick={() => setStatus(item)}
+                                    active={status.value === item.value}
+                                >
+                                    {item.label}
+                                </NavDropdown.Item>
+                            )
+                        })
+                    }
+                </NavDropdown>
+
+                <NavDropdown 
+                 className={styles.dropdown}
+                title={sort.value ? sort.label : "Sort"}>
+                    {
+                        sortOptions.map((item, index) => {
+                            return (
+                                <NavDropdown.Item 
+                                    key={index}
+                                    onClick={() => setSort(item)}
+                                    active={sort.value === item.value}
+                                >
+                                    {item.label}
+                                </NavDropdown.Item>
+                            )
+                        })
+                    }
+                </NavDropdown>
+                <Form inline>
+                    <FormControl
+                        type="text"
+                        placeholder="Search"
+                        value={search}
+                        onChange={(event) => setSearch(event.target.value)}
+                        className={styles.searchInput} />
+                    <Button
+                        variant="outline-success"
+                        onClick={handleSubmit}
+                        className={styles.searchBttn}
+                    >
+                        Search</Button>
+                </Form>
+
+            </div>
+
         </>
     );
 

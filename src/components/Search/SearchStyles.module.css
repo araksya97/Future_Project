@@ -1,0 +1,29 @@
+.searchbar{
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    background-color: rgb(235, 227, 219);
+}
+.dateOpt{
+    padding: 30px 10px 10px;
+    display: flex;
+    flex-flow: column;
+}
+.datePicker {
+    max-width: 120px;
+    max-height: 25px;
+    background-color: rgb(235, 227, 219);
+    border: 1px solid #000;
+    border-radius: 5px;
+}
+.dropdown {
+    font-size: 20px;
+    padding: 30px 10px;
+}
+.searchBttn {
+margin: 10px auto;
+}
+
+@media screen and (max-width: 576px) {
+
+}

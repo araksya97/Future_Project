@@ -7,11 +7,11 @@ import Confirm from '../../Confirm';
 import EditTaskModal from '../../EditTaskModal/EditTaskModal';
 import { connect } from 'react-redux';
 import { getTasks, removeSelected } from '../../../store/actions';
-import Search from '../../Search/Search';
-
+import Footer from '../../Footer/Footer'
 
 
 class ToDo extends React.PureComponent {
+    
     state = {
         selectedTasks: new Set(),
         showConfirm: false,
@@ -87,9 +87,9 @@ class ToDo extends React.PureComponent {
             )
         });
         return (
+            <>
             <div className={styles.todo}>
                 <Container>
-                    <Search/>
                     <Row className='justify-content-center text-center'>
                         <Col xs={4}>
                             <Button
@@ -138,7 +138,11 @@ class ToDo extends React.PureComponent {
                         onClose={this.toggleNewTaskModal}
                     />
                 }
+            
+            
             </div>
+            <Footer/>
+            </>
         );
     }
 }

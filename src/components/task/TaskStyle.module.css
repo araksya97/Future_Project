@@ -1,8 +1,11 @@
 .task {
     margin: 10px auto;
 }
-.actButton{
+.button{
     margin: 10px;
+}
+.btnactive{
+    border: 1px solid  darkolivegreen;
 }
 .selected {
     border: 1px solid red;
@@ -10,4 +13,13 @@
 .date {
     font-size: 12px;
     margin-bottom: 3px;
+}
+.title {
+    color: darkolivegreen;}
+.title:hover {
+    color: darkolivegreen;
+}
+.span {
+    color: rgb(61, 77, 34);
+    font-weight: 500;
 }

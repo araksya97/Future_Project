@@ -4,7 +4,7 @@ import styles from './NavMenuStyle.module.css';
 import Search from '../Search/Search';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faFilter } from '@fortawesome/free-solid-svg-icons';
-import logo from '../../img/logo.png';
+import logo from '../../img/ToDoLogo.png';
 
 export default class NavMenu extends React.PureComponent {
     state = {

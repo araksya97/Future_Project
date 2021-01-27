@@ -12,15 +12,15 @@
     color: darkred;
 }
 .footerFirst {
-max-width: 500px;
-padding:  20px 0;
+    max-width: 500px;
+    padding:  20px 0;
 }
 .footerFirst>h3 {
     font-size: 25px;
     padding-bottom: 15px ;
 }
 .footerSec {
-padding-bottom: 15px;
+    padding-bottom: 15px;
 }
 .footerSec>ul>li {
     list-style-type: none;

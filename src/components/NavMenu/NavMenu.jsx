@@ -25,6 +25,7 @@ export default class NavMenu extends React.PureComponent {
 
     render() {
         return (
+            <>
                 <div className={styles.navbar}>
                     <NavLink
                         to='/'
@@ -93,13 +94,15 @@ export default class NavMenu extends React.PureComponent {
                     >
                         <FontAwesomeIcon icon={faFilter} />
                     </button>
-                    { this.state.openFilter &&
+                    
+
+                </div>
+                { this.state.openFilter &&
                     <Search
                         onClose={this.toggleFilterBtn}
                     />
                 }
-
-                </div>
+                </>
         )
     }
 };

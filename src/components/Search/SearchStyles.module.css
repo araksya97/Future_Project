@@ -3,6 +3,7 @@
     justify-content: space-evenly;
     flex-wrap: wrap;
     background-color: rgb(235, 227, 219);
+    width: 100vw;
 }
 .dateOpt{
     padding: 30px 10px 10px;
@@ -21,7 +22,7 @@
     padding: 30px 10px;
 }
 .searchBttn {
-margin: 10px auto;
+    margin: 10px auto;
 }
 
 

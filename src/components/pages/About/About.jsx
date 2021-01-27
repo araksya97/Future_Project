@@ -12,10 +12,10 @@ export default function About() {
                     <p>This page is designed for keeping you informed  about your responsibilities. It will help you don't forget your any assignments. We can just call it "to do" page.</p>
                 </li>
                 <li>
-                    <p>Here you can see and explore my <a href={"https://github.com/araksya97/Future_Project"} target="_blank">GitHub</a> souce code. </p>
+                    <p>Here you can see and explore my <a href={"https://github.com/araksya97/Future_Project"} >GitHub</a> souce code. </p>
                 </li>
                 <li>
-                    <p>This is my <a href={"https://www.linkedin.com/in/araksya-badalyan-001b34189"} target="_blank">LinkedIn</a> profile. </p>
+                    <p>This is my <a href={"https://www.linkedin.com/in/araksya-badalyan-001b34189"}>LinkedIn</a> profile. </p>
                 </li>
             </ul>
 

@@ -11,21 +11,20 @@ import NavMenu from './components/NavMenu/NavMenu';
 import SingleTask from './components/pages/SingleTask/SingleTask';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import Spinner from '../src/components/pages/Spinner/Spinner'
-
+import Footer from '../src/components/Footer/Footer'
 function App(props) {
-  if(props.errorMessage){
+  if (props.errorMessage) {
     toast.error(props.errorMessage)
   }
-  if(props.successMessage){
+  if (props.successMessage) {
     toast.success(props.successMessage)
   }
 
   return (
-    
-    <div className="App">
 
+    <>
       <NavMenu />
       <Switch>
         <Route path='/' exact component={ToDo} />
@@ -36,7 +35,7 @@ function App(props) {
         <Route path='/404' exact component={NotFound} />
         <Redirect to='/404' />
       </Switch>
- 
+      <Footer />
       <ToastContainer
         position="bottom-left"
         autoClose={3000}
@@ -48,8 +47,8 @@ function App(props) {
         draggable
         pauseOnHover
       />
-      {props.loading && <Spinner/>}
-    </div>
+      {props.loading && <Spinner />}
+    </>
   );
 }
 const mapStateToProps = (state) => {

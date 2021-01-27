@@ -3,13 +3,14 @@ import * as actionTypes from './actionTypes';
 const defaultState = {
    tasks: [],
    task: null,
+   contacts: [],
    successMessage: null,
    errorMessage: null,
    editTaskSuccess: false,
    addTaskSuccess: false,
    removeTasksSuccess: false,
    removeTaskSuccess: false,
-   loading: false
+   loading: false,
 };
 
 const reducer = (state = defaultState, action) => {
@@ -158,6 +159,16 @@ const reducer = (state = defaultState, action) => {
             ...state,
             task: action.task,
             loading: false
+         }
+      }
+
+      case actionTypes.CONTACT_FORM: {
+         const contacts = [...state.contacts, action.contact ]
+         return {
+            ...state,
+            contacts: contacts,
+            loading: false,
+            successMessage: 'Contacts send successlly!',
          }
       }
       default: return state

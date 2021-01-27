@@ -1,0 +1,20 @@
+.about {
+    height: calc(100vh - 280px);
+    max-width: 700px;
+    
+}
+.about>ul {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: flex-start;
+}
+.about>ul>li{
+    list-style-type: none;
+    padding: 5px 15px ;
+    width: 100vw;
+    justify-content: center;
+
+}
+.about>ul>li>h3 {
+    padding: 10px;
+}

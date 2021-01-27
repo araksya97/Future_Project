@@ -7,7 +7,6 @@ import Confirm from '../../Confirm';
 import EditTaskModal from '../../EditTaskModal/EditTaskModal';
 import { connect } from 'react-redux';
 import { getTasks, removeSelected } from '../../../store/actions';
-import Footer from '../../Footer/Footer'
 
 
 class ToDo extends React.PureComponent {
@@ -87,7 +86,6 @@ class ToDo extends React.PureComponent {
             )
         });
         return (
-            <>
             <div className={styles.todo}>
                 <Container>
                     <Row className='justify-content-center text-center'>
@@ -141,8 +139,6 @@ class ToDo extends React.PureComponent {
             
             
             </div>
-            <Footer/>
-            </>
         );
     }
 }

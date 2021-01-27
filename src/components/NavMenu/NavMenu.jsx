@@ -25,12 +25,17 @@ export default class NavMenu extends React.PureComponent {
 
     render() {
         return (
-            <>
                 <div className={styles.navbar}>
-                    <img
-                        src={logo} alt="Logo"
-                        className={styles.logo}
-                         />
+                    <NavLink
+                        to='/'
+                        exact
+                    >
+                        <img
+                            src={logo} alt="Logo"
+                            className={styles.logo}
+                        />
+                    </NavLink>
+
 
 
                     <div
@@ -88,15 +93,13 @@ export default class NavMenu extends React.PureComponent {
                     >
                         <FontAwesomeIcon icon={faFilter} />
                     </button>
-
-
-                </div>
-                { this.state.openFilter &&
+                    { this.state.openFilter &&
                     <Search
                         onClose={this.toggleFilterBtn}
                     />
                 }
-            </>
+
+                </div>
         )
     }
 };

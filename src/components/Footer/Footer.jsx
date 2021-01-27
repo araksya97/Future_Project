@@ -9,15 +9,15 @@ export default function Footer() {
         <div className={styles.footer}>
             <div className={styles.footerFirst}>
                 <h3>TODO LIST PAGE</h3>
-                <p>This page is designed for keeping you informed  about your responsibilities. It will help you don't forget your any assignments. We can just called it "to do" page.</p>
+                <p>This page is designed for keeping you informed  about your responsibilities. It will help you don't forget your any assignments. We can just call it "to do" page.</p>
             </div>
             <div className={styles.footerSec}>
                 <ul>
                     <li>
-                        <a href={"https://github.com/araksya97/Future_Project"}>GitHub</a>
+                        <a href={"https://github.com/araksya97/Future_Project"} target="_blank">GitHub</a>
                     </li>
                     <li>
-                        <a href={"https://www.linkedin.com/in/araksya-badalyan-001b34189"}>LinkedIn</a>
+                        <a href={"https://www.linkedin.com/in/araksya-badalyan-001b34189"} target="_blank">LinkedIn</a>
                     </li>
                 </ul>
             </div>

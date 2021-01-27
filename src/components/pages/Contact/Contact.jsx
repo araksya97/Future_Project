@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import styles from './ContactStyle.module.css'
-
+import { connect } from 'react-redux';
+import { contactForm } from '../../../store/actions'
 
 const defaultValues = {
     name: '',
     email: '',
-    phone: '',
     message: ''
 };
-export default function Contact() {
+function Contact(props) {
     const [values, setValues] = useState(defaultValues)
 
     const handleChange = (event) => {
@@ -18,17 +18,20 @@ export default function Contact() {
             [name]: value,
         });
     };
-    const send = () => {
+    const sendContact = () => {
         if (values === defaultValues) {
             return;
         }
-        console.log(values);
-
+        props.contactForm(values)
         setValues(defaultValues);
     };
     return (
         <div className={styles.form}>
+            <h3>
+                Contact Us
+            </h3>
             <input
+                required
                 className={styles.formElem}
                 type='text'
                 name='name'
@@ -37,6 +40,7 @@ export default function Contact() {
                 onChange={handleChange}
             />
             <input
+                required
                 className={styles.formElem}
                 type='email'
                 name='email'
@@ -44,15 +48,8 @@ export default function Contact() {
                 placeholder='Email'
                 onChange={handleChange}
             />
-            <input
-                className={styles.formElem}
-                type='phone'
-                name='phone'
-                value={values.phone}
-                placeholder='Phone'
-                onChange={handleChange}
-            />
             <textarea
+                required
                 className={styles.formElem}
                 name='message'
                 value={values.message}
@@ -60,12 +57,16 @@ export default function Contact() {
                 onChange={handleChange}
             >
             </textarea>
-            <button 
+            <button
                 className={styles.formButton}
-                onClick={send}
+                onClick={sendContact}
             >
                 Send
             </button>
         </div>
     )
 };
+const mapDispatchToProps = {
+    contactForm,
+};
+export default connect(null, mapDispatchToProps)(Contact)

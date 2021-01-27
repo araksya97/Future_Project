@@ -1,9 +1,8 @@
 .navbar{
-    width: 100vw;
+    width: 100%;
     height: 100px;
     display: flex;
-    justify-content:space-evenly;
-    margin: 0, auto;
+    justify-content:space-around;
     background-color: darkolivegreen;
     z-index: 9999;
 }
@@ -58,7 +57,7 @@
     .menu {
         display: block;
         top: 90px;
-        width: 100%;
+        width: 100vw;
         min-height: 80px;
         left: 0;
         position: absolute;

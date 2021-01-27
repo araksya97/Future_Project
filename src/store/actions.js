@@ -113,3 +113,16 @@ export function changeTaskStatus(id, data, from) {
     }
 } 
 
+export function contactForm(values) {
+    return (dispatch) => {
+        dispatch({ type: actionTypes.LOADING });
+        request(`${apiUrl}/form`, 'POST', values)
+            .then(res => {
+                dispatch({ type: actionTypes.CONTACT_FORM, contact: res });
+            })
+            .catch(err => {
+                dispatch({ type: actionTypes.ERROR, error: err.message });
+            });
+
+    }
+}

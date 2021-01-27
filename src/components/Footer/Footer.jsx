@@ -14,10 +14,10 @@ export default function Footer() {
             <div className={styles.footerSec}>
                 <ul>
                     <li>
-                        <a href={"https://github.com/araksya97/Future_Project"} target="_blank">GitHub</a>
+                        <a href={"https://github.com/araksya97/Future_Project"} >GitHub</a>
                     </li>
                     <li>
-                        <a href={"https://www.linkedin.com/in/araksya-badalyan-001b34189"} target="_blank">LinkedIn</a>
+                        <a href={"https://www.linkedin.com/in/araksya-badalyan-001b34189"} >LinkedIn</a>
                     </li>
                 </ul>
             </div>
